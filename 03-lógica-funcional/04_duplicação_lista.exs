@@ -1,3 +1,4 @@
+
 ExUnit.start()
 
 defmodule DuplicacaoLista do
@@ -16,9 +17,10 @@ defmodule DuplicacaoLista do
       []
   """
   @spec run(list(any)) :: list(any)
-  def run(lista) do
-    # FIXME
-  end
+  def run([], acc, reps), do: Enum.reverse(acc)
+  def run([h|t], acc, reps) when reps == 2, do: run(t, acc, 0)
+  def run([h|t], acc\\[], reps\\0) when reps<2, do: run([h|t], [h | acc], reps+1)
+
 end
 
 defmodule DuplicacaoListaTest do

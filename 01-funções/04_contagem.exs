@@ -17,7 +17,9 @@ defmodule Contagem do
   """
   @spec run(String.t(), String.t()) :: integer
   def run(frase, palavra) do
-    # FIXME
+    |>String.trim(frase, ".")
+    |>String.split(" ",:trim true)
+    |Enum.filter(fn x -> x = palavra end)
   end
 end
 

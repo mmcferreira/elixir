@@ -26,7 +26,7 @@ defmodule CPF do
       verificador e usando pesos de 11 a 2.
 
   5. Validação Final:
-    - Compare os dígitos verificadores calculados com os dois últimos dígitos do CPF.
+    - Compare os dígitos verificadores calculados com os dois últimos dígitos  do CPF.
       Se ambos os pares de dígitos forem iguais, o CPF é válido.
 
   ## Dicas

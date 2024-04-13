@@ -1,3 +1,4 @@
+
 ExUnit.start()
 
 defmodule Temperatura do
@@ -19,8 +20,20 @@ defmodule Temperatura do
   """
   @spec run(integer, :fahrenheit | :kelvin) :: float | :error
   def run(celsius, medida) do
-
+    cond do
+      is_integer(celsius) and medida == :fahrenheit -> fahren(celsius)
+      is_integer(celsius) and medida == :kelvin -> kelv(celsius)
+      :true -> :error
+    end
   end
+
+    defp fahren(x) do
+      (9 * x) / 5 + 32
+    end
+
+    defp kelv(x) do
+      x + 273.15
+    end
 end
 
 defmodule TemperaturaTest do
