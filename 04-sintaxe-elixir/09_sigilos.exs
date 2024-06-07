@@ -9,12 +9,13 @@ defmodule UsoSigilos do
 
   ## Exemplos
 
-      iex> UsoSigilos.run("Os números são 123 e 456")
-      ["123", "456"]
+      iex> UsoSigilos.run("Os números são 789 e 101")
+      ["789", "101"]
   """
   @spec run(String.t()) :: list(String.t())
   def run(texto) do
-    # FIXME
+    Regex.scan(~r/[0-9]{3}/, texto)
+    |> List.flatten()
   end
 end
 
@@ -22,6 +23,6 @@ defmodule UsoSigilosTest do
   use ExUnit.Case, async: true
 
   test "extrai números da string corretamente" do
-    assert UsoSigilos.run("Os números são 123 e 456") == ["123", "456"]
+    assert UsoSigilos.run("Os números são 789 e 101") == ["789", "101"]
   end
 end
