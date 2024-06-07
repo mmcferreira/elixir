@@ -17,8 +17,23 @@ defmodule Subconjuntos do
       [[]]
   """
   @spec run(list(any)) :: list(list(any))
-  def run(lista) do
-    # FIXME
+
+  # Função base para quando a lista é vazia.
+  def run([], acc), do: [[]]
+
+  # Inicializa a recursão com o acumulador padrão [[]].
+  def run(list, acc \\ [[]]) do
+    add_unit(list, [list | acc])
+  end
+
+  # Auxiliar, adiciona elementos à lista de subconjuntos.
+  defp add_unit([], unitary), do: unitary
+
+  # Processa a lista
+  defp add_unit([hd | tl], unitary \\ []) do
+    # Adiciona o elemento atual (hd) a cada subconjunto existente.
+    new_unitary = Enum.map(unitary, fn subset -> [hd | subset] end)
+    add_unit(tl, unitary ++ new_unitary)
   end
 end
 

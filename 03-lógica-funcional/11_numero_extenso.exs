@@ -18,7 +18,54 @@ defmodule NumeroPorExtenso do
   """
   @spec run(integer()) :: String.t()
   def run(num) do
-    # FIXME
+    numeros_por_extenso(num)
+  end
+
+  defp numeros_por_extenso(0), do: "zero"
+
+  defp numeros_por_extenso(num) when num < 0 do
+    "menos " <> numeros_por_extenso(-num)
+  end
+
+  defp numeros_por_extenso(num) when num < 20 do
+    ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove",
+     "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"]
+    |> Enum.at(num)
+  end
+
+  defp numeros_por_extenso(num) when num < 100 do
+    dezenas = ["vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"]
+    dezena = div(num, 10)
+    unidade = rem(num, 10)
+
+    if unidade == 0 do
+      Enum.at(dezenas, dezena - 2)
+    else
+      Enum.at(dezenas, dezena - 2) <> " e " <> numeros_por_extenso(unidade)
+    end
+  end
+
+  defp numeros_por_extenso(num) when num < 1000 do
+    centenas = ["cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"]
+    centena = div(num, 100)
+    resto = rem(num, 100)
+
+    if resto == 0 do
+      Enum.at(centenas, centena)
+    else
+      Enum.at(centenas, centena) <> " e " <> numeros_por_extenso(resto)
+    end
+  end
+
+  defp numeros_por_extenso(num) when num < 1_000_000 do
+    milhares = div(num, 1000)
+    resto = rem(num, 1000)
+
+    if resto == 0 do
+      numeros_por_extenso(milhares) <> " mil"
+    else
+      numeros_por_extenso(milhares) <> " mil e " <> numeros_por_extenso(resto)
+    end
   end
 end
 
